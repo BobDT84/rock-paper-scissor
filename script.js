@@ -4,7 +4,11 @@ function computerSelect(){
 }
 
 function playerSelect(){
-    console.log("Player make your selection:\n1. Rock\n2. Paper\n3. Scissor\n");
+    console.log("Player make your selection:\n" +
+        "1. Rock\n" +
+        "2. Paper\n" +
+        "3. Scissor\n"
+        );
     let select = parseInt(prompt("What is your selection?"));
     if (select == 1 || select == 2 || select == 3) {
         return select;
@@ -15,8 +19,10 @@ function playerSelect(){
 }
 
 function declareWinner(player, computer){
-    console.log("Player selected " + selectToText(player) + 
-    "\nComputer selected " + selectToText(computer));
+    console.log(
+        "Player selected " + selectToText(player) + 
+        "\nComputer selected " + selectToText(computer)
+        );
     switch(true){
         case player == computer:
             console.log("It's a Draw!");
