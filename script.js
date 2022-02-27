@@ -26,18 +26,19 @@ function declareWinner(player, computer){
     switch(true){
         case player == computer:
             console.log("It's a Draw!");
-            break;
+            return "draw";
         case player == 1 && computer == 3:
             console.log("Player Wins!");
-            break;
+            return "player";
         case player == 2 && computer == 1:
             console.log("Player Wins!");
-            break;
+            return "player";
         case player == 3 && computer == 2:
             console.log("Player Wins!");
-            break;
+            return "player";
         case true:
             console.log("Computer Wins!");
+            return "computer";
     }
 }
 
@@ -53,11 +54,32 @@ function selectToText(select){
 }
 
 function playRound(){
-    declareWinner(playerSelect(),computerSelect());
-    console.log("Do you want to play again?");
-    if(confirm("Play again?")){
-        playRound();
+    return declareWinner(playerSelect(),computerSelect());
+    }
+
+
+function game(){
+    let win = 0,
+        lose = 0,
+        draw = 0;
+    for( let i=0; i<5; i++){
+        switch(playRound()){
+            case "draw":
+                draw++;
+                break;
+            case "player":
+                win++;
+                break;
+            case "computer":
+                lose++;
+                break;
+        }
+        console.log(
+            "Round " + (i+1).toString() +
+            "\nPlayer's Score: " + win.toString() +
+            "\nComputer's Score: " + lose.toString() +
+            "\nDraws: " + draw.toString());
     }
 }
 
-playRound();
+game();
