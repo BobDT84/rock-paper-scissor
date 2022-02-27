@@ -1,27 +1,27 @@
-function computerSelect(){
-    let select = Math.floor(Math.random()*3)+1;
-    return select;
+function selectForComputer(){
+    let selection = Math.floor(Math.random()*3)+1;
+    return selection;
 }
 
-function playerSelect(){
+function askPlayerToSelect(){
     console.log("Player make your selection:\n" +
         "1. Rock\n" +
         "2. Paper\n" +
         "3. Scissor\n"
         );
-    let select = parseInt(prompt("What is your selection?"));
-    if (select == 1 || select == 2 || select == 3) {
-        return select;
+    let selection = parseInt(prompt("What is your selection?"));
+    if (selection == 1 || selection == 2 || selection == 3) {
+        return selection;
     } else {
         console.log("That was not a valid selection. Please try again.");
-        return playerSelect();
+        return askPlayerToSelect();
     }
 }
 
 function declareWinner(player, computer){
     console.log(
-        "Player selected " + selectToText(player) + 
-        "\nComputer selected " + selectToText(computer)
+        "Player selection " + selectToText(player) + 
+        "\nComputer selection " + selectToText(computer)
         );
     switch(true){
         case player == computer:
@@ -42,8 +42,8 @@ function declareWinner(player, computer){
     }
 }
 
-function selectToText(select){
-    switch(select){
+function selectToText(selection){
+    switch(selection){
         case 1:
             return "Rock";
         case 2:
@@ -54,32 +54,32 @@ function selectToText(select){
 }
 
 function playRound(){
-    return declareWinner(playerSelect(),computerSelect());
+    return declareWinner(askPlayerToSelect(),selectForComputer());
     }
 
 
-function game(){
-    let win = 0,
-        lose = 0,
-        draw = 0;
+function playGame(){
+    let wins = 0,
+        loses = 0,
+        draws = 0;
     for( let i=0; i<5; i++){
         switch(playRound()){
             case "draw":
-                draw++;
+                draws++;
                 break;
             case "player":
-                win++;
+                wins++;
                 break;
             case "computer":
-                lose++;
+                loses++;
                 break;
         }
         console.log(
             "Round " + (i+1).toString() +
-            "\nPlayer's Score: " + win.toString() +
-            "\nComputer's Score: " + lose.toString() +
-            "\nDraws: " + draw.toString());
+            "\nPlayer's Score: " + wins.toString() +
+            "\nComputer's Score: " + loses.toString() +
+            "\nDraws: " + draws.toString());
     }
 }
 
-game();
+playGame();
