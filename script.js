@@ -1,12 +1,3 @@
-
-
-
-function playRound(event){
-    console.log(event);
-    console.log(this.id);
-    return declareWinner(this.id,selectForComputer());
-    }
-
 function selectForComputer(){
     let selection = Math.floor(Math.random()*3)+1;
     switch(selection){
@@ -38,7 +29,7 @@ function declareWinner(player, computer){
         case player == rock && computer == scissors:
             console.log("Player Wins!");
             return "player";
-        case player == paper && computer == rock:
+            case player == paper && computer == rock:
             console.log("Player Wins!");
             return "player";
         case player == scissors && computer == paper:
@@ -50,25 +41,29 @@ function declareWinner(player, computer){
     }
 }
 
+function getPlayerChoice(event){
+    return this.id;
+    }
+
 function playGame(){
     const selectButtons = document.getElementsByClassName('button');
     for(let button of selectButtons) {
-        button.addEventListener('click',playRound);
+        button.addEventListener('click',getPlayerChoice);
     }
     let wins = 0,
-        loses = 0,
-        draws = 0;
+    loses = 0,
+    draws = 0;
     switch(playRound()){
         case "draw":
             draws++;
             break;
-        case "player":
+            case "player":
             wins++;
             break;
-        case "computer":
+            case "computer":
             loses++;
             break;
-        console.log(
+            console.log(
             "Round " + (i+1).toString() +
             "\nPlayer's Score: " + wins.toString() +
             "\nComputer's Score: " + loses.toString() +
