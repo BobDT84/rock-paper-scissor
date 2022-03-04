@@ -1,7 +1,4 @@
-const selectButtons = document.getElementsByClassName('button');
-for(let button of selectButtons) {
-    button.addEventListener('click',playRound);
-}
+
 
 
 function playRound(event){
@@ -12,18 +9,18 @@ function playRound(event){
 
 function selectForComputer(){
     let selection = Math.floor(Math.random()*3)+1;
-    return selectToText(selection);
-}
-
-function selectToText(selection){
     switch(selection){
         case 1:
-            return "rock";
+            selection = "rock";
+            break;
         case 2:
-            return "paper";
+            selection = "paper";
+            break;
         case 3:
-            return "scissor";
+            selection = "scissors";
+            break;
     }
+    return selection;
 }
 
 function declareWinner(player, computer){
@@ -31,17 +28,20 @@ function declareWinner(player, computer){
         "Player selection " + player + 
         "\nComputer selection " + computer
         );
+        let rock = 'rock',
+            paper = 'paper',
+            scissors = 'scissors'
         switch(true){
             case player == computer:
                 console.log("It's a Draw!");
                 return "draw";
-        case player == 1 && computer == 3:
+        case player == rock && computer == scissors:
             console.log("Player Wins!");
             return "player";
-        case player == 2 && computer == 1:
+        case player == paper && computer == rock:
             console.log("Player Wins!");
             return "player";
-        case player == 3 && computer == 2:
+        case player == scissors && computer == paper:
             console.log("Player Wins!");
             return "player";
         case true:
@@ -50,9 +50,11 @@ function declareWinner(player, computer){
     }
 }
 
-
-
 function playGame(){
+    const selectButtons = document.getElementsByClassName('button');
+    for(let button of selectButtons) {
+        button.addEventListener('click',playRound);
+    }
     let wins = 0,
         loses = 0,
         draws = 0;
