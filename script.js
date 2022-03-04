@@ -62,18 +62,16 @@ function playGame(){
     let wins = 0,
         loses = 0,
         draws = 0;
-    for( let i=0; i<5; i++){
-        switch(playRound()){
-            case "draw":
-                draws++;
-                break;
-            case "player":
-                wins++;
-                break;
-            case "computer":
-                loses++;
-                break;
-        }
+    switch(playRound()){
+        case "draw":
+            draws++;
+            break;
+        case "player":
+            wins++;
+            break;
+        case "computer":
+            loses++;
+            break;
         console.log(
             "Round " + (i+1).toString() +
             "\nPlayer's Score: " + wins.toString() +
