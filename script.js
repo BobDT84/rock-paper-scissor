@@ -1,32 +1,40 @@
-function selectForComputer(){
-    let selection = Math.floor(Math.random()*3)+1;
-    return selection;
+const selectButtons = document.getElementsByClassName('button');
+for(let button of selectButtons) {
+    button.addEventListener('click',playRound);
 }
 
-function askPlayerToSelect(){
-    console.log("Player make your selection:\n" +
-        "1. Rock\n" +
-        "2. Paper\n" +
-        "3. Scissor\n"
-        );
-    let selection = parseInt(prompt("What is your selection?"));
-    if (selection == 1 || selection == 2 || selection == 3) {
-        return selection;
-    } else {
-        console.log("That was not a valid selection. Please try again.");
-        return askPlayerToSelect();
+
+function playRound(event){
+    console.log(event);
+    console.log(this.id);
+    return declareWinner(this.id,selectForComputer());
+    }
+
+function selectForComputer(){
+    let selection = Math.floor(Math.random()*3)+1;
+    return selectToText(selection);
+}
+
+function selectToText(selection){
+    switch(selection){
+        case 1:
+            return "rock";
+        case 2:
+            return "paper";
+        case 3:
+            return "scissor";
     }
 }
 
 function declareWinner(player, computer){
     console.log(
-        "Player selection " + selectToText(player) + 
-        "\nComputer selection " + selectToText(computer)
+        "Player selection " + player + 
+        "\nComputer selection " + computer
         );
-    switch(true){
-        case player == computer:
-            console.log("It's a Draw!");
-            return "draw";
+        switch(true){
+            case player == computer:
+                console.log("It's a Draw!");
+                return "draw";
         case player == 1 && computer == 3:
             console.log("Player Wins!");
             return "player";
@@ -42,20 +50,6 @@ function declareWinner(player, computer){
     }
 }
 
-function selectToText(selection){
-    switch(selection){
-        case 1:
-            return "Rock";
-        case 2:
-            return "Paper";
-        case 3:
-            return "Scissor";
-    }
-}
-
-function playRound(){
-    return declareWinner(askPlayerToSelect(),selectForComputer());
-    }
 
 
 function playGame(){

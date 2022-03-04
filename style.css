@@ -1,0 +1,10 @@
+.container {
+    display: flex;
+    justify-content: space-around;
+}
+.button {
+    margin: 50px;
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+}
