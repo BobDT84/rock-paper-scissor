@@ -41,33 +41,39 @@ function declareWinner(player, computer){
     }
 }
 
-function getPlayerChoice(event){
-    return this.id;
+function playRound(event){
+    console.log("playRound");
+    let outcome = '';
+    outcome = declareWinner(this.id,selectForComputer());
+    logScore(outcome);
+    score.round++;
+}
+
+let score = {
+    round: 0,
+    wins: 0,
+    loses: 0,
+    draws: 0
+};
+
+function logScore(outcome){
+    switch(outcome){
+        case "draw":
+            score.draws++;
+            break;
+        case "player":
+            score.wins++;
+            break;
+        case "computer":
+            score.loses++;
+            break;
     }
+}
 
 function playGame(){
     const selectButtons = document.getElementsByClassName('button');
     for(let button of selectButtons) {
-        button.addEventListener('click',getPlayerChoice);
-    }
-    let wins = 0,
-    loses = 0,
-    draws = 0;
-    switch(playRound()){
-        case "draw":
-            draws++;
-            break;
-            case "player":
-            wins++;
-            break;
-            case "computer":
-            loses++;
-            break;
-            console.log(
-            "Round " + (i+1).toString() +
-            "\nPlayer's Score: " + wins.toString() +
-            "\nComputer's Score: " + loses.toString() +
-            "\nDraws: " + draws.toString());
+        button.addEventListener('click',playRound);
     }
 }
 
