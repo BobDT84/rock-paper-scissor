@@ -45,28 +45,31 @@ function playRound(event){
     console.log("playRound");
     let outcome = '';
     outcome = declareWinner(this.id,selectForComputer());
-    logScore(outcome);
-    score.round++;
+    printScore(outcome);
 }
 
 let score = {
-    round: 0,
-    wins: 0,
-    loses: 0,
-    draws: 0
+    win: 0,
+    lose: 0,
+    draw: 0
 };
 
-function logScore(outcome){
+function printScore(outcome){
     switch(outcome){
         case "draw":
-            score.draws++;
+            score.draw++;
             break;
         case "player":
-            score.wins++;
+            score.win++;
             break;
         case "computer":
-            score.loses++;
+            score.lose++;
             break;
+    }
+    let scoreElement;
+    for(let scoreKey of Object.keys(score)){
+        scoreElement = document.getElementById(scoreKey);
+        scoreElement.textContent = score[scoreKey];
     }
 }
 
