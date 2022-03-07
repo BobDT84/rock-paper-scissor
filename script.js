@@ -14,58 +14,50 @@ function selectForComputer(){
     return selection;
 }
 
-function declareWinner(player, computer){
-    console.log(
-        "Player selection " + player + 
-        "\nComputer selection " + computer
-        );
-        let rock = 'rock',
-            paper = 'paper',
-            scissors = 'scissors'
-        switch(true){
-            case player == computer:
-                console.log("It's a Draw!");
-                return "draw";
+function logWinner(player, computer){
+    let rock = 'rock',
+        paper = 'paper',
+        scissors = 'scissors'
+    switch(true){
+        case player == computer:
+            console.log("It's a Draw!");
+            break;
         case player == rock && computer == scissors:
             console.log("Player Wins!");
-            return "player";
-            case player == paper && computer == rock:
+            score.player++;
+            break;
+        case player == paper && computer == rock:
             console.log("Player Wins!");
-            return "player";
+            score.player++;
+            break;
         case player == scissors && computer == paper:
             console.log("Player Wins!");
-            return "player";
+            score.player++;
+            break;
         case true:
             console.log("Computer Wins!");
-            return "computer";
+            score.computer++;
+            break;
     }
 }
 
 function playRound(event){
-    console.log("playRound");
     let outcome = '';
-    outcome = declareWinner(this.id,selectForComputer());
+    outcome = logWinner(this.id,selectForComputer());
     printScore(outcome);
+    if(score.player >= 5){
+        alert('Player Wins!');
+    } else if(score.computer >= 5){
+        alert('Computer Wins!');
+    }
 }
 
 let score = {
-    win: 0,
-    lose: 0,
-    draw: 0
+    player: 0,
+    computer: 0
 };
 
 function printScore(outcome){
-    switch(outcome){
-        case "draw":
-            score.draw++;
-            break;
-        case "player":
-            score.win++;
-            break;
-        case "computer":
-            score.lose++;
-            break;
-    }
     let scoreElement;
     for(let scoreKey of Object.keys(score)){
         scoreElement = document.getElementById(scoreKey);
